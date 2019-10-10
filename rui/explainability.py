@@ -125,8 +125,10 @@ def v2():
         #print ('df_daily',df_daily)
         df_daily = df_daily.sort_values('Dretwd')
         rank = [i for i in range(0, df_daily.shape[0])]
-        df_daily.insert(0, 'Rank', rank) # 排名
-
+        # 只要前30名的，并将 是否是前30，作为新的排名标准
+        rankbool = 1 if rank <= 30 else 0
+        df_daily.insert(0, 'Rank', rankbool) # 排名
+        
         for index, row in df_daily.iterrows():
             after_sort.append(row)
 
